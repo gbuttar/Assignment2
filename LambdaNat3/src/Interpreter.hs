@@ -37,7 +37,7 @@ evalCBN(EIf e1 e2 e3 e4) =
     else (evalCBN e4)
 
 evalCBN(ELet i e1 e2) =
-  eval (subst 1 e1 e2)
+  eval (subst i e1 e2)
 
 evalCBN(EMinus e1) = case (evalCBN e1) of
   (ENatS e2) -> (evalCBN e2)
