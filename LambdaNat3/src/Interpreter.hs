@@ -35,12 +35,12 @@ evalCBN(EIf e1 e2 e3 e4) =
   if (evalCBN e1) == (evalCBN e2)
     then (evalCBN e3)
     else (evalCBN e4)
-    
-evalCBN(Elet i e1 e2) =
+
+evalCBN(ELet i e1 e2) =
   eval (subst 1 e1 e2)
 
-evalCBN(EMinusOne e1) = case (evalCBN e1) of
-  (EnatS e2) -> (evalCBN e2)
+evalCBN(EMinus e1) = case (evalCBN e1) of
+  (ENatS e2) -> (evalCBN e2)
 ----------------------------------------------------
 evalCBN x = x -- this is a catch all clause, currently only for variables, must be the clause of the eval function
 
