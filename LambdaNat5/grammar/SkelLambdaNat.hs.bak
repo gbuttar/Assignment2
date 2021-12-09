@@ -19,23 +19,10 @@ transId x = case x of
 
 transProgram :: AbsLambdaNat.Program -> Result
 transProgram x = case x of
-  AbsLambdaNat.Prog exps -> failure x
+  AbsLambdaNat.Prog exp -> failure x
 
 transExp :: AbsLambdaNat.Exp -> Result
 transExp x = case x of
   AbsLambdaNat.EAbs id exp -> failure x
-  AbsLambdaNat.EIf exp1 exp2 exp3 exp4 -> failure x
-  AbsLambdaNat.ELet id exp1 exp2 -> failure x
-  AbsLambdaNat.ERec id exp1 exp2 -> failure x
-  AbsLambdaNat.EHd exp -> failure x
-  AbsLambdaNat.ETl exp -> failure x
-  AbsLambdaNat.ELE exp1 exp2 -> failure x
-  AbsLambdaNat.EPlus exp1 exp2 -> failure x
-  AbsLambdaNat.EMinus exp1 exp2 -> failure x
-  AbsLambdaNat.ETimes exp1 exp2 -> failure x
   AbsLambdaNat.EApp exp1 exp2 -> failure x
-  AbsLambdaNat.ENil -> failure x
-  AbsLambdaNat.ECons exp1 exp2 -> failure x
-  AbsLambdaNat.EInt integer -> failure x
   AbsLambdaNat.EVar id -> failure x
-  AbsLambdaNat.EFix exp -> failure x

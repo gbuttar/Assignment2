@@ -21,10 +21,15 @@ $i = [$l $d _ ']     -- identifier character
 $u = [. \n]          -- universal: any character
 
 @rsyms =    -- symbols and non-identifier-like reserved words
-   \; \; | \\ | \. | \= | \+ | \- | \* | \# | \: | \( | \)
+   \\ | \. | \( | \)
 
 :-
 
+-- Line comments
+"//" [.]* ;
+
+-- Block comments
+\/ \* [$u # \*]* \* ([$u # [\* \/]] [$u # \*]* \* | \*)* \/ ;
 
 $white+ ;
 @rsyms
@@ -36,8 +41,7 @@ $l $i*
     { tok (\p s -> PT p (eitherResIdent TV s)) }
 
 
-$d+
-    { tok (\p s -> PT p (TI s))    }
+
 
 
 {
@@ -106,7 +110,7 @@ eitherResIdent tv s = treeFind resWords
                               | s == a = t
 
 resWords :: BTree
-resWords = b "\\" 11 (b "-" 6 (b ")" 3 (b "(" 2 (b "#" 1 N N) N) (b "+" 5 (b "*" 4 N N) N)) (b ";;" 9 (b ":" 8 (b "." 7 N N) N) (b "=" 10 N N))) (b "less_equal" 16 (b "if" 14 (b "hd" 13 (b "else" 12 N N) N) (b "in" 15 N N)) (b "then" 19 (b "rec" 18 (b "let" 17 N N) N) (b "tl" 20 N N)))
+resWords = b "." 3 (b ")" 2 (b "(" 1 N N) N) (b "\\" 4 N N)
    where b s n = let bs = s
                  in  B bs (TS bs n)
 

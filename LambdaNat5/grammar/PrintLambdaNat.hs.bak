@@ -112,30 +112,11 @@ instance Print AbsLambdaNat.Id where
 
 instance Print AbsLambdaNat.Program where
   prt i = \case
-    AbsLambdaNat.Prog exps -> prPrec i 0 (concatD [prt 0 exps])
-
-instance Print [AbsLambdaNat.Exp] where
-  prt = prtList
+    AbsLambdaNat.Prog exp -> prPrec i 0 (concatD [prt 0 exp])
 
 instance Print AbsLambdaNat.Exp where
   prt i = \case
     AbsLambdaNat.EAbs id_ exp -> prPrec i 1 (concatD [doc (showString "\\"), prt 0 id_, doc (showString "."), prt 0 exp])
-    AbsLambdaNat.EIf exp1 exp2 exp3 exp4 -> prPrec i 2 (concatD [doc (showString "if"), prt 0 exp1, doc (showString "="), prt 0 exp2, doc (showString "then"), prt 0 exp3, doc (showString "else"), prt 0 exp4])
-    AbsLambdaNat.ELet id_ exp1 exp2 -> prPrec i 3 (concatD [doc (showString "let"), prt 0 id_, doc (showString "="), prt 0 exp1, doc (showString "in"), prt 0 exp2])
-    AbsLambdaNat.ERec id_ exp1 exp2 -> prPrec i 4 (concatD [doc (showString "let"), doc (showString "rec"), prt 0 id_, doc (showString "="), prt 0 exp1, doc (showString "in"), prt 0 exp2])
-    AbsLambdaNat.EHd exp -> prPrec i 6 (concatD [doc (showString "hd"), prt 0 exp])
-    AbsLambdaNat.ETl exp -> prPrec i 6 (concatD [doc (showString "tl"), prt 0 exp])
-    AbsLambdaNat.ELE exp1 exp2 -> prPrec i 9 (concatD [prt 10 exp1, doc (showString "less_equal"), prt 10 exp2])
-    AbsLambdaNat.EPlus exp1 exp2 -> prPrec i 10 (concatD [prt 10 exp1, doc (showString "+"), prt 11 exp2])
-    AbsLambdaNat.EMinus exp1 exp2 -> prPrec i 10 (concatD [prt 10 exp1, doc (showString "-"), prt 11 exp2])
-    AbsLambdaNat.ETimes exp1 exp2 -> prPrec i 11 (concatD [prt 11 exp1, doc (showString "*"), prt 12 exp2])
-    AbsLambdaNat.EApp exp1 exp2 -> prPrec i 13 (concatD [prt 13 exp1, prt 14 exp2])
-    AbsLambdaNat.ENil -> prPrec i 15 (concatD [doc (showString "#")])
-    AbsLambdaNat.ECons exp1 exp2 -> prPrec i 15 (concatD [prt 16 exp1, doc (showString ":"), prt 15 exp2])
-    AbsLambdaNat.EInt n -> prPrec i 16 (concatD [prt 0 n])
-    AbsLambdaNat.EVar id_ -> prPrec i 17 (concatD [prt 0 id_])
-    AbsLambdaNat.EFix exp -> prPrec i 5 (concatD [doc (showString "fix"), prt 0 exp])
-  prtList _ [] = concatD []
-  prtList _ [x] = concatD [prt 0 x]
-  prtList _ (x:xs) = concatD [prt 0 x, doc (showString ";;"), prt 0 xs]
+    AbsLambdaNat.EApp exp1 exp2 -> prPrec i 2 (concatD [prt 2 exp1, prt 3 exp2])
+    AbsLambdaNat.EVar id_ -> prPrec i 3 (concatD [prt 0 id_])
 

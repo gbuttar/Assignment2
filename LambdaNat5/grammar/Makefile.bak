@@ -16,8 +16,8 @@ all : TestLambdaNat
 
 # Rules for building the parser.
 
-AbsLambdaNat.hs LexLambdaNat.x ParLambdaNat.y PrintLambdaNat.hs TestLambdaNat.hs : LambdaNat0.cf
-	bnfc --haskell LambdaNat0.cf
+AbsLambdaNat.hs LexLambdaNat.x ParLambdaNat.y PrintLambdaNat.hs TestLambdaNat.hs : LambdaNat1.cf
+	bnfc --haskell LambdaNat1.cf
 
 %.hs : %.y
 	${HAPPY} ${HAPPY_OPTS} $<
@@ -34,7 +34,7 @@ clean :
 	-rm -f *.hi *.o *.log *.aux *.dvi
 
 distclean : clean
-	-rm -f AbsLambdaNat.hs AbsLambdaNat.hs.bak ComposOp.hs ComposOp.hs.bak DocLambdaNat.txt DocLambdaNat.txt.bak ErrM.hs ErrM.hs.bak LayoutLambdaNat.hs LayoutLambdaNat.hs.bak LexLambdaNat.x LexLambdaNat.x.bak ParLambdaNat.y ParLambdaNat.y.bak PrintLambdaNat.hs PrintLambdaNat.hs.bak SkelLambdaNat.hs SkelLambdaNat.hs.bak TestLambdaNat.hs TestLambdaNat.hs.bak XMLLambdaNat.hs XMLLambdaNat.hs.bak ASTLambdaNat.agda ASTLambdaNat.agda.bak ParserLambdaNat.agda ParserLambdaNat.agda.bak IOLib.agda IOLib.agda.bak Main.agda Main.agda.bak LambdaNat0.dtd LambdaNat0.dtd.bak TestLambdaNat LexLambdaNat.hs ParLambdaNat.hs ParLambdaNat.info ParDataLambdaNat.hs Makefile
+	-rm -f AbsLambdaNat.hs AbsLambdaNat.hs.bak ComposOp.hs ComposOp.hs.bak DocLambdaNat.txt DocLambdaNat.txt.bak ErrM.hs ErrM.hs.bak LayoutLambdaNat.hs LayoutLambdaNat.hs.bak LexLambdaNat.x LexLambdaNat.x.bak ParLambdaNat.y ParLambdaNat.y.bak PrintLambdaNat.hs PrintLambdaNat.hs.bak SkelLambdaNat.hs SkelLambdaNat.hs.bak TestLambdaNat.hs TestLambdaNat.hs.bak XMLLambdaNat.hs XMLLambdaNat.hs.bak ASTLambdaNat.agda ASTLambdaNat.agda.bak ParserLambdaNat.agda ParserLambdaNat.agda.bak IOLib.agda IOLib.agda.bak Main.agda Main.agda.bak LambdaNat1.dtd LambdaNat1.dtd.bak TestLambdaNat LexLambdaNat.hs ParLambdaNat.hs ParLambdaNat.info ParDataLambdaNat.hs Makefile
 
 
 # EOF
